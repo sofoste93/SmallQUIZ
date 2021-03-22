@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/njike/CLionProjects/LyndaLinkedIn/Learning_C/SwitchStatement/SmallQUIZ/main.c
+stdio.h
+-
+stdbool.h
+-
+
