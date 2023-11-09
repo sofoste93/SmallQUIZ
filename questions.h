@@ -11,7 +11,7 @@ typedef struct {
 
 static const QuizQuestion quizQuestions[] = {
         {"According to the Bible [A.B.C.D] can be called a christian: ",
-         "\t A: Joseph the son of Israel(Jacob)\n"
+         "\t A: Joseph the son of Jacob (called Israel)\n"
          "\t B: Jesus the carpenter of Nazareth\n"
          "\t C: John the author of the book of Revelation\n"
          "\t D: None of them\n", 'C'},
