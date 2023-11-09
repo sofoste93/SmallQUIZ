@@ -1,8 +1,9 @@
 //
-// Created by njike on 22.03.2021.
+// Created by sofoste93 on 22.03.2021.
 //
 
 #ifndef SWITCHSTATEMENT_MAINQUIZ_H
 #define SWITCHSTATEMENT_MAINQUIZ_H
 
 #endif //SWITCHSTATEMENT_MAINQUIZ_H
+

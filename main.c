@@ -1,73 +1,59 @@
 #include <stdio.h>
 #include <stdbool.h>
-
-
-/**
- * =======================================
- * switch-case statement in C
- * Making multiple decisions with
- * switch-statement
- * written by (c) sofoste
- * @return
- * ======================================
- */
+#include <stdlib.h>
+#include <ctype.h>
+#include "questions.h"
 
 static char userChoice;
-static bool quit = false;
+static int score = 0;
+static size_t currentQuestionIndex = 0;
+
+void ask_question() {
+    const QuizQuestion* currentQuestion = &quizQuestions[currentQuestionIndex];
+
+    printf("%s\n", currentQuestion->question);
+    printf("=========================\n"
+           "%s\n\n"
+           "Q or q to exit the program\n"
+           "=========================\n", currentQuestion->choices);
+
+    printf("Enter your choice: ");
+    scanf(" %c", &userChoice); // add space to ignore leading whitespaces
+
+    switch (toupper(userChoice)) {  // Using toupper() function to avoid case sensitiveness
+        case 'Q':
+            printf("Are you sure you want to exit the program? All progress will be lost. Press y to confirm or any other key to continue: ");
+            char confirmExit;
+            scanf(" %c", &confirmExit);
+            if (toupper(confirmExit) == 'Y') {  // Using toupper() here too
+                printf("Program terminated.\n");
+                printf("Final score: %d\n", score);
+                exit(0);
+            }
+            return;
+        default:
+            if(toupper(userChoice) == currentQuestion->correctAnswer) {
+                printf("Good answer!\n");
+                score++;
+                // Move to the next question
+                if(currentQuestionIndex < questionCount - 1) {
+                    currentQuestionIndex++;
+                }
+            } else {
+                printf("Incorrect answer.\n");
+            }
+    }
+    // Print current score
+    printf("Current score: %d\n=========================\n", score);
+}
 
 int main() {
-    //A small Game Quiz
-    //char userChoice;
-
     printf("QUIZ OF THE DAY\n");
     printf("=========================\n");
-    printf("According to the Bible [A.B.C.D] can be called a christian (choose one): \n");
-    printf("================================================\n"
-           "\t A: Joseph the son of Israel(Jacob)\n"
-           "\t B: Jesus the carpenter of Nazareth\n"
-           "\t C: John the author of the book of Revelation\n"
-           "\t D: None of them\n"
 
-           "\t Q or 0: to exit the program \n"
-           "================================================\n");
-
-    do{
-        printf("Enter your choice: ");
-        scanf("%c", &userChoice);
-        //switch-case
-        switch (userChoice) {
-            case 'A':
-                printf("I would say that Joseph didn't known anything\n"
-                     "about christianity before..\n"
-                     "So answer not accepted\n");
-                break;
-            case 'B':
-                printf("I think Jesus is just a carpenter, the Designer of\n"
-                     "all the christians..don't you think so?\n"
-                     "Answer not accepted..\n");
-                break;
-            case 'C':
-                printf("Because of Jesus John, a fellow disciple became a christian\n"
-                     "since he started to live like Jesus-Christ\n"
-                     "GOOD ANSWER!");
-                break;
-            case 'D':
-                printf("PLEASE CONSIDER READ YOUR BIBLE BEFORE STARTING THIS QUIZ.\n");
-                break;
-            case 'Q':
-            case '0':
-                printf("Good bye!");
-                break;
-            default:
-                /*puts("The Bible is not just a book - it content can\n"
-                     "lead you to the Truth - it can lead you to God.\n");*/
-                printf("\n> INVALID INPUT!!! :<\n");
-        }
-
-    } while (!quit);
-
-    printf("=========================\n");
-    printf("Program terminated.");
+    while (true) {
+        ask_question();
+    }
 
     return 0;
 }
